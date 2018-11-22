@@ -53,7 +53,7 @@ runInstall(){
   showNotice '(Step 1/7) 更新 YUM packages(推荐更新)'
 
   while true; do
-    read -p "Please answer yes or no. [Y/n]" yn -r -e -i Y
+    read -p "Please answer yes or no. [Y/n]" yn
     case $yn in
       [Yy]* ) isUpdate='1'; break;;
       [Nn]* ) isUpdate='0'; break;;
@@ -486,7 +486,7 @@ clear
   echo '2) 卸载'
   echo '3) Upgrade packages'
   echo '4) 退出脚本'
-  read -p '请输入数字 [1-4]: ' -r -e operation
+  read -p '请输入数字 [1-4]: ' -r -e -i 1 operation
   case ${operation} in
     1)
       clear
