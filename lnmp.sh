@@ -50,17 +50,17 @@ showNotice(){
 runInstall(){
   showNotice 'Installing...'
 
-  showNotice '(Step 1/7) Update YUM packages'
+  showNotice '(Step 1/7) 更新 YUM packages(推荐更新)'
 
   while true; do
-    read -p "Please answer yes or no. [Y/n]" yn
+    read -p "Please answer yes or no. [Y/n]" yn -r -e -i Y
     case $yn in
       [Yy]* ) isUpdate='1'; break;;
       [Nn]* ) isUpdate='0'; break;;
     esac
   done
 
-  showNotice '(Step 2/7) Input server IPv4 Address'
+  showNotice '(Step 2/7) 输入服务器 IPv4 地址'
   read -p "IP address: " -r -e -i "${ipAddress}" ipAddress
   if [ "${ipAddress}" = '' ]; then
     showError 'Invalid IP Address'
@@ -73,7 +73,7 @@ runInstall(){
   echo "3) MariaDB-10.1"
   echo "4) MariaDB-10.2"
   echo "5) MariaDB-10.3"
-  echo "6) MySQL-5.5"
+  echo "6) MySQL-5.5(默认)"
   echo "7) MySQL-5.6"
   echo "8) MySQL-5.7"
   echo "9) MySQL-8.0"
@@ -89,7 +89,7 @@ runInstall(){
   echo "2) PHP-5.5"
   echo "3) PHP-5.6"
   echo "4) PHP-7.0"
-  echo "5) PHP-7.1"
+  echo "5) PHP-7.1(默认)"
   echo "6) PHP-7.2"
   echo "0) Not need"
   read -p 'PHP [1-6,0]: ' -r -e -i 5 phpV
@@ -100,7 +100,7 @@ runInstall(){
 
   showNotice "(Step 5/7) Select the Nginx version"
   echo "1) Nginx-1.12"
-  echo "2) Nginx-1.13"
+  echo "2) Nginx-1.13(默认)"
   echo "0) Not need"
   read -p 'Nginx [1-2,0]: ' -r -e -i 2 nginxV
   if [ "${nginxV}" = '' ]; then
@@ -110,7 +110,7 @@ runInstall(){
 
   showNotice "(Step 6/7) Select the DB tool version"
   echo "1) Adminer"
-  echo "2) phpMyAdmin"
+  echo "2) phpMyAdmin(默认)"
   echo "0) Not need"
   read -p 'DB tool [1-3]: ' -r -e -i 2 dbV
   if [ "${dbV}" = '' ]; then
@@ -119,7 +119,7 @@ runInstall(){
   fi
 
   showNotice "(Step 7/7) Use a mirror server to download rpms"
-  echo "1) Source station"
+  echo "1) Source station(默认)"
   echo "2) Mirror station"
   read -p 'Proxy server [1-2]: ' -r -e -i 1 freeV
   if [ "${freeV}" = '' ]; then
@@ -354,9 +354,9 @@ runInstall(){
       newHash=$(echo -n ${RANDOM} | md5sum | sed "s/ .*//" | cut -b -18)
       cp -a /tmp/LNMP-${envType}/etc/phpMyAdmin /etc/
       sed -i "s/739174021564331540/${newHash}/g" /etc/phpMyAdmin/config.inc.php
-      cp -a /usr/share/phpMyAdmin /home/wwwroot/default/
-      rm -rf /home/wwwroot/default/phpMyAdmin/doc/html
-      cp -a /usr/share/doc/phpMyAdmin-*/html /home/wwwroot/default/phpMyAdmin/doc/
+      cp -a /usr/share/phpMyAdmin /home/wwwroot/default/public/
+      rm -rf /home/wwwroot/default/public/phpMyAdmin/doc/html
+      cp -a /usr/share/doc/phpMyAdmin-*/html /home/wwwroot/default/public/phpMyAdmin/doc/
     fi
   fi
 
@@ -438,7 +438,7 @@ runInstall(){
     echo "================================================================"
   else
     echo -e "\\033[41m [LNMP] Sorry, Install Failed. \\033[0m"
-    echo "Please contact us: https://github.com/maicong/LNMP/issues"
+    
   fi
 }
 
@@ -479,14 +479,14 @@ clear
   echo '| |___    | |\  |    | |  | |    |  __/ '
   echo '|_____|   |_| \_|    |_|  |_|    |_|    '
   echo ''
-  echo -e "For more details see \033[4mhttps://git.io/lnmp\033[0m"
+  echo -e "全球极速安装lnmp"
   echo ''
-  showNotice 'Please select your operation:'
-  echo '1) Install'
-  echo '2) Uninstall'
+  showNotice '请选择安装对象:'
+  echo '1) 安装'
+  echo '2) 卸载'
   echo '3) Upgrade packages'
-  echo '4) Exit'
-  read -p 'Select an option [1-4]: ' -r -e operation
+  echo '4) 退出脚本'
+  read -p '请输入数字 [1-4]: ' -r -e operation
   case ${operation} in
     1)
       clear
