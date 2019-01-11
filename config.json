@@ -50,7 +50,7 @@
 
   "ssrpanel": {
     // Node id on your SSR Panel
-    "nodeId": 1,
+    "nodeId": RASnodeId,
     // every N seconds
     "checkRate": 60,
     // user config
@@ -58,16 +58,16 @@
       // inbound tag, which inbound you would like add user to
       "inboundTag": "proxy",
       "level": 0,
-      "alterId": 16,
+      "alterId": RASalterId,
       "security": "none"
     },
     // db connection
     "mysql": {
-      "host": "173.82.187.168",
-      "port": 3306,
-      "user": "ssrpanel",
-      "password": "mm80908090",
-      "dbname": "ssrpanel"
+      "host": "localhost",
+      "port": RAS3306,
+      "user": "RASroot",
+      "password": "RASpasswd",
+      "dbname": "RASssrpanel"
     }
   }
 
