@@ -673,7 +673,7 @@ rm -rf raspanel.sh
 check_system
 sleep 1
 
-echo "树莓安装器SSRPanel版本:20190112 基于开源代码制作"
+echo "树莓安装器SSRPanel 版本:20190112 基于开源代码制作"
 echo "1. >>>安装 SSRPanel 前端面板(极速安装)         "
 echo "2. >>>安装 SSRR(3.4)及对接节点                           "
 echo "3. >>>安装 V2ray(Go版)及对接节点                                  "
@@ -685,9 +685,9 @@ echo "8. >>>安装旧版SSR            "
 echo "9. >>>安装控制面板(编译安装)（停止使用）"
 echo "10. >>>安装 BBR魔改版"
 echo "       请先安装BBR加速               "
-echo "       Power By v2ray SSRpanel SSRR "
-echo "       树莓官网：http://www.berryphone.club    QQ群:139126900  "
-echo "        bug反馈邮箱:1414061719@qq.com"
+echo "       Power By SSRpanel  "
+echo " 树莓官网：http://www.berryphone.club "
+echo "   bug反馈邮箱:1414061719@qq.com"
 echo '请输入需要安装的选项数字'
 echo
 read installway
