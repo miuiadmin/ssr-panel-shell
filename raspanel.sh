@@ -649,8 +649,8 @@ rm -rf raspanel.sh
 
 #echo "################################################"
 
-#ipAddress=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^192\\.168|^172\\.1[6-9]\\.|^172\\.2[0-9]\\.|^172\\.3[0-2]\\.|^10\\.|^127\\.|^255\\." | head -n 1) || '0.0.0.0'
-	ipAddress=`curl -s http://members.3322.org/dyndns/getip`;
+ipAddress=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^192\\.168|^172\\.1[6-9]\\.|^172\\.2[0-9]\\.|^172\\.3[0-2]\\.|^10\\.|^127\\.|^255\\." | head -n 1) || '0.0.0.0'
+#	ipAddress=`curl -s http://members.3322.org/dyndns/getip`;
 #	ipAddress=`wget http://members.3322.org/dyndns/getip -O - -q ; echo`;
 	shadowsocksr="https://raw.githubusercontent.com/Andyanna/ssrrs/master/shadowsocksr.zip"
 	shadowsocksr2="https://raw.githubusercontent.com/Andyanna/ssrrs/master/shadowsocksr.zip"
@@ -673,7 +673,7 @@ rm -rf raspanel.sh
 check_system
 sleep 1
 
-echo "树莓安装器SSRPanel 版本:20190112 基于开源代码制作"
+echo "树莓安装器SSRPanel版本:20190112 基于开源代码制作"
 echo "1. >>>安装 SSRPanel 前端面板(极速安装)         "
 echo "2. >>>安装 SSRR(3.4)及对接节点                           "
 echo "3. >>>安装 V2ray(Go版)及对接节点                                  "
@@ -684,10 +684,10 @@ echo "7. >>>升级 控制面板   "
 echo "8. >>>安装旧版SSR            "
 echo "9. >>>安装控制面板(编译安装)（停止使用）"
 echo "10. >>>安装 BBR魔改版"
-echo "       请先安装BBR加速               "
-echo "       Power By SSRpanel  "
-echo " 树莓官网：http://www.berryphone.club "
-echo "   bug反馈邮箱:1414061719@qq.com"
+echo "      请先安装BBR加速               "
+echo "       Power By  SSRpanel  "
+echo " 树莓官网：http://www.berryphone.club     "
+echo "  bug反馈邮箱:1414061719@qq.com"
 echo '请输入需要安装的选项数字'
 echo
 read installway
