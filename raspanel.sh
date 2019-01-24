@@ -424,7 +424,6 @@ freeV="1"
 #	cp -a -rf /root/master/. /home/wwwroot/default/
 #	rm -rf /root/master/*
 	cd /home/wwwroot/default/
-		#替换数据库配置
 	cp .env.example .env
 
 #	systemctl restart nginx.service
@@ -433,7 +432,7 @@ mysql -hlocalhost -uroot -proot --default-character-set=utf8mb4<<EOF
 create database ssrpanel;
 use ssrpanel;
 source /home/wwwroot/default/sql/db.sql;
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${mysqlPWD}' WITH GRANT OPTION;
 flush privileges;
 EOF
 	#安装依赖
@@ -443,8 +442,8 @@ EOF
 	cd /home/wwwroot/default/
 	chown -R www:www storage/
 	chmod -R 777 storage/
-   systemctl restart nginx.service
-   systemctl start php-fpm.service
+	systemctl restart nginx.service
+ systemctl start php-fpm.service
 	#开启日志监控
 	yum -y install vixie-cron crontabs
 	rm -rf /var/spool/cron/root
