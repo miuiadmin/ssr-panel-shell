@@ -11,6 +11,7 @@ wget --no-check-certificate https://github.com/Andyanna/ssrrs/raspanel.sh &&chmo
   
 
 更新日志
+
 1.增加一键对接SS Go DB版
 
  
@@ -20,6 +21,7 @@ Bug反馈:
 
 
 请提交Issues
+
 E-mail:
 
 
@@ -35,9 +37,10 @@ E-mail:
 
 
 使用的开源代码
+
 @ssrpanel/SSRPanel
 @cx9208/bbrplus
 @ColetteContreras/v2ray-ssrpanel-plugin
 @v2ray/v2ray-core
 @ShadowsocksRR
-@
+@vnet
