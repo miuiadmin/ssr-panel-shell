@@ -1,24 +1,36 @@
 树莓一键安装SSRPanel脚本
 
-更新日期:2019年1月22日
+更新日期:2019年1月25日
 
-安装脚本
+安装脚本:
 
 
 wget --no-check-certificate https://github.com/Andyanna/ssrrs/raspanel.sh &&chmod +x raspanel.sh&&sh raspanel.sh
+ 
+  
+  
 
-Bug反馈
+更新日志
+1.增加一键对接SS Go DB版
+
+ 
+ 
+
+Bug反馈:
 
 
 请提交Issues
 E-mail:
 
 
+ 
 
 树莓网:http://www.berryphone.club
 
 
 
+ 
+ 
 
 
 
