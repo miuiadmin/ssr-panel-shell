@@ -1,6 +1,5 @@
 #!/bin/bash
 #树莓一键安装脚本
-#更新日期：20190111
 
 
 function check_system(){
@@ -476,6 +475,54 @@ EOF
 	echo "请登录后台面板添加节点，然后安装后端程序"
 
 }
+function install_ss(){
+# 	echo '设置每天几点几分重启节点'
+#	 read -p " 按下回车默认0时， 小时(0-23):" -r -e -i 0 hour
+#	 read -p " 按下回车默认30分，分钟(0-59):" -r -e -i 30 minute
+	 read -p " 按下回车默认，mysql服务器地址:" -r -e -i localhost ssserver
+	 read -p " 按下回车默认，mysql服务器端口:" -r -e -i 3306 ssport
+	 read -p " 按下回车默认，mysql服务器用户名:" -r -e -i root ssuser
+	 read -p " 按下回车默认，mysql服务器密码:" -r -e -i root sspass
+	 read -p " 按下回车默认，mysql服务器数据库名:" -r -e -i ssrpanel ssdb
+	 read -p " 按下回车默认，SSR节点ID（nodeid）:" -r -e -i 1 node
+ cd /root
+ rm -rf config.json
+ wget https://github.com/rc452860/vnet/releases/download/v0.0.4/vnet_linux_amd64 -O server
+ chmod +x server
+ wget -c --no-check-certificate "${Download2}/ssconfig.json" config.json
+ 
+	sed -i -e "s/RASnodeId/$node/g" config.json
+	sed -i -e "s/localhost/$ssserver/g" config.json
+	sed -i -e "s/RASssrpanel/$ssdb/g" config.json
+	sed -i -e "s/RASpasswd/$sspass/g" config.json
+	sed -i -e "s/RAS3306/$ssport/g" config.json
+	sed -i -e "s/RASroot/$ssuser/g" config.json
+	chmod 644 config.json
+	chmod +x config.json
+	echo '配置完成'
+	nohup ./server
+	echo 'SS Go DB已开始运行'
+	service iptables stop
+	service firewalld stop
+	systemctl disable firewalld.service
+	chkconfig iptables off
+	echo '已关闭iptables、firewalld，如有需要请自行配置。'
+
+
+	chmod +x /etc/rc.d/rc.local
+	echo /sbin/service crond start >> /etc/rc.d/rc.local
+	echo "nohup ./root/server" >> /etc/rc.d/rc.local
+	echo '设置开机运行SS Go DB'
+#	echo "$minute $hour * * * root /sbin/reboot" >> /etc/crontab
+echo "" >> /etc/crontab
+	service crond start
+
+
+
+    
+    
+}
+
 function install_ssrr(){
 	echo '设置每天几点几分重启节点'
 	 read -p " 按下回车默认0时， 小时(0-23):" -r -e -i 0 hour
@@ -625,9 +672,6 @@ function install_BBRmo(){
 function install_Ruisu(){
      wget -N --no-check-certificate https://github.com/91yun/serverspeeder/raw/master/serverspeeder.sh && bash serverspeeder.sh
 }
-function install_ssrj(){
-     wget -N --no-check-certificate "${Download2}"/ssrjiu.sh && bash ssrjiu.sh
-}
 function install_fix(){
      #删除安装环境
      echo "开始"
@@ -675,18 +719,18 @@ sleep 1
 
 echo "树莓安装器SSRPanel版本:20190112 基于开源代码制作"
 echo "1. >>>安装 SSRPanel 前端面板(极速安装)         "
-echo "2. >>>安装 SSRR(3.4)及对接节点                           "
-echo "3. >>>安装 V2ray(Go版)及对接节点                                  "
-echo "4. >>>安装 锐速                                      "
-echo "5. >>>安装 BBr                         "
-echo "6. >>>日志分析（仅支持单机单节点）                                           "
+echo "2. >>>安装 SS Go DB(ssrpanel专用)    "
+echo "3. >>>安装 V2ray Go 及对接节点                                  "
+echo "4. >>>安装 锐速                               "
+echo "5. >>>安装 BBR原版                         "
+echo "6. >>>日志分析（仅支持单机单节点）               "
 echo "7. >>>升级 控制面板   "
-echo "8. >>>安装旧版SSR            "
+echo "8. >>>安装 SSRR(3.4)(Python版)及对接节点          "
 echo "9. >>>安装控制面板(编译安装)（停止使用）"
 echo "10. >>>安装 BBR魔改版"
 echo "      请先安装BBR加速               "
 echo "       Power By  SSRpanel  "
-echo " 树莓官网：http://www.berryphone.club     "
+echo " 树莓官网：http://www.berrys.top     "
 echo "  bug反馈邮箱:1414061719@qq.com"
 echo '请输入需要安装的选项数字'
 echo
@@ -701,7 +745,7 @@ echo "安装系统组件"
 install_ssrpanel
 elif [[ $installway == "2" ]]
 then
-install_ssrr
+install_ss
 elif [[ $installway == "3" ]]
 then
 install_v2ray
@@ -719,8 +763,6 @@ then
 
 cd /home/wwwroot/default/
 chmod a+x update.sh && sh update.sh
-	#安装依赖
-	cd /home/wwwroot/default/
 	php composer.phar install
 	php artisan key:generate
 	cd /home/wwwroot/default/
@@ -729,7 +771,7 @@ chmod a+x update.sh && sh update.sh
 echo "控制面板更新成功"
 elif [[ $installway == "8" ]]
 then
-install_ssrj
+install_ssrr
 elif [[ $installway == "9" ]]
 then
 echo "9"

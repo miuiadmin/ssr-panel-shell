@@ -1,0 +1,18 @@
+{
+    "mode": "db",
+    "dbconfig": {
+        "host": "localhost",
+        "user": "RASroot",
+        "passwd": "RASpasswd",
+        "port": "RAS3306",
+        "database": "RASssrpanel",
+        "rate": 1,
+        "NodeId": RASnodeId,
+        "SyncTime": 3000,
+        "OnlineSyncTime": 60000
+    },
+    "shadowsocks_options": {
+        "tcp_timeout": 0,
+        "udp_timeout": 0
+    }
+}
