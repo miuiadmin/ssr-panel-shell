@@ -479,6 +479,7 @@ function install_ss(){
 # 	echo '设置每天几点几分重启节点'
 #	 read -p " 按下回车默认0时， 小时(0-23):" -r -e -i 0 hour
 #	 read -p " 按下回车默认30分，分钟(0-59):" -r -e -i 30 minute
+	 read -p " 按下回车默认，节点流量比例（默认1）:" -r -e -i 1 RASrate
 	 read -p " 按下回车默认，mysql服务器地址:" -r -e -i localhost ssserver
 	 read -p " 按下回车默认，mysql服务器端口:" -r -e -i 3306 ssport
 	 read -p " 按下回车默认，mysql服务器用户名:" -r -e -i root ssuser
@@ -491,6 +492,7 @@ function install_ss(){
  chmod +x server
  wget -c --no-check-certificate "${Download2}/ssconfig.json" config.json
  
+ sed -i -e "s/RASrate/$RASrate/g" config.json
 	sed -i -e "s/RASnodeId/$node/g" config.json
 	sed -i -e "s/localhost/$ssserver/g" config.json
 	sed -i -e "s/RASssrpanel/$ssdb/g" config.json
@@ -514,7 +516,7 @@ function install_ss(){
 	echo "nohup ./root/server" >> /etc/rc.d/rc.local
 	echo '设置开机运行SS Go DB'
 #	echo "$minute $hour * * * root /sbin/reboot" >> /etc/crontab
-echo "" >> /etc/crontab
+echo "*/20  *  *  *  * root killall -9 server&&nohup ./root/server" >> /etc/crontab
 	service crond start
 
 

@@ -6,7 +6,7 @@
         "passwd": "RASpasswd",
         "port": "RAS3306",
         "database": "RASssrpanel",
-        "rate": 1,
+        "rate": RASrate,
         "NodeId": RASnodeId,
         "SyncTime": 3000,
         "OnlineSyncTime": 60000
