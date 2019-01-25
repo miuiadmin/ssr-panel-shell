@@ -5,7 +5,7 @@
 安装脚本:
 
 
-wget --no-check-certificate https://github.com/Andyanna/ssrrs/raspanel.sh &&chmod +x raspanel.sh&&sh raspanel.sh
+wget --no-check-certificate https://raw.githubusercontent.com/Andyanna/ssrrs/master/raspanel.sh &&chmod +x raspanel.sh&&sh raspanel.sh
  
   
   
