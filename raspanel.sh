@@ -515,7 +515,7 @@ function install_ss(){
 	echo "nohup ./root/server" >> /etc/rc.d/rc.local
 	echo '设置开机运行SS Go DB'
 #	echo "$minute $hour * * * root /sbin/reboot" >> /etc/crontab
-echo "*/20  *  *  *  * root killall -9 server&&nohup ./root/server" >> /etc/crontab
+echo "*/20  *  *  *  * root cd /root/&&killall -9 server&&nohup ./server" >> /etc/crontab
 	service crond start
 
 
